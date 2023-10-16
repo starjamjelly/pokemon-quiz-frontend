@@ -1,0 +1,128 @@
+/*
+###########################################################################
+  ポケモン図鑑詳細画面
+###########################################################################
+*/
+/* --- container --- */
+.container {
+  padding: 20px 20px;
+  background-color: #eee;
+}
+
+/*
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+  前後遷移ボタン領域
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+*/
+.move-nav-area {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+/* --- 遷移ボタン --- */
+.mat-flat-btn--move-btn {
+  width: 100%;
+  border-radius: 9999px;
+  color: #666 !important;
+  background-color: rgba($color: #fff, $alpha: 0.3) !important;
+}
+
+/*
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+  ポケモン詳細領域
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+*/
+/* --- 詳細（枠組み） --- */
+.detail-card {
+  &__header-area {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 8px;
+    border-bottom: 1px solid #ddd;
+  }
+
+  &__img-container {
+    margin: 20px auto;
+    width: fit-content;
+  }
+
+  &__img {
+    display: block;
+    width: 200px;
+    height: 200px;
+  }
+
+  &__detail-lbl {
+    margin-right: 1rem;
+    font-weight: 600;
+  }
+
+  &__detail-content {
+    font-weight: 600;
+    color: #716e77;
+  }
+}
+
+.detail-row {
+  &:not(:last-of-type) {
+    padding-bottom: 1rem;
+    border-bottom: 1px solid #ddd;
+  }
+}
+
+/* --- 詳細（ヘッダー部） --- */
+.header-area {
+  &__pokedex-id {
+    display: inline-block;
+    transform: translateY(4px);
+    font-size: 0.625rem;
+    font-weight: 200;
+  }
+
+  &__pokemon-name {
+    margin-bottom: 0;
+    font-size: 1.25rem;
+    font-weight: 600;
+  }
+}
+
+.mat-mini-fab--favorite-btn {
+  color: #e79686 !important;
+  background-color: #fff !important;
+  box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.2);
+}
+
+.favorite-btn--active {
+  color: #fff !important;
+  background-color: #e79686 !important;
+}
+
+/* --- 詳細（メイン部） --- */
+.type-icon {
+  display: inline-block;
+  line-height: 1rem;
+  text-align: center;
+  color: #fff;
+  border-radius: 16px;
+}
+
+.type-detail {
+  &__type-icon {
+    min-width: 5rem;
+    padding: 0.25rem 0;
+    font-size: 0.7rem;
+
+    &:not(:last-of-type) {
+      margin-right: 0.6rem;
+    }
+  }
+}
+
+.characteristic-detail {
+  &__content {
+    line-height: 1.75rem;
+  }
+}

@@ -1,0 +1,268 @@
+/*
+###########################################################################
+  シルエットクイズ画面
+###########################################################################
+*/
+/* --- container --- */
+.container {
+  padding: 20px 20px;
+  background-color: #ffb800;
+}
+
+/*
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+  問題（プログレスバー・画像他）
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+*/
+.question-card {
+  padding-right: 24px;
+  padding-left: 24px;
+
+  &__img-container {
+    margin: auto;
+    position: relative;
+    width: fit-content;
+
+    &--biggest {
+      overflow: hidden;
+      border-radius: 50%;
+    }
+  }
+
+  &__img {
+    width: 200px;
+    height: 200px;
+    position: relative;
+    z-index: 1;
+
+    &--silhouette {
+      filter: brightness(0);
+    }
+
+    &--biggest {
+      transform: scale(3);
+    }
+  }
+
+  &__visual-area {
+    margin-bottom: 12px;
+    border-bottom: 1px solid #eee;
+  }
+
+  &--is-correct::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 90%;
+    height: 90%;
+    box-sizing: border-box;
+    border-radius: 50%;
+    border: 20px solid var(--CorrectGreen);
+  }
+
+  &--is-fail::before,
+  &--is-fail::after {
+    content: '';
+    position: absolute;
+
+    top: 50%;
+    left: 50%;
+    width: 20px;
+    height: 90%;
+    background: var(--FailRed);
+  }
+
+  &--is-fail::before {
+    transform: translate(-50%, -50%) rotate(45deg);
+  }
+
+  &--is-fail::after {
+    transform: translate(-50%, -50%) rotate(-45deg);
+  }
+}
+
+.num-lbl__number {
+  font-size: 22px;
+}
+
+/*
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+  問題（選択肢エリア）
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+*/
+.answer-choice-area {
+  min-height: 232px;
+
+  &__btn-container {
+    position: relative;
+    margin-bottom: 4px;
+
+    &:last-of-type {
+      margin-bottom: 12px;
+    }
+  }
+
+  &__choice-btn {
+    display: block;
+  }
+
+  &__echo-btn {
+    display: block;
+  }
+}
+
+/* --- 選択肢ボタン --- */
+.choice-btn {
+  &--mat-flat-btn {
+    width: 100%;
+    box-shadow: 0 1px 4px 0 rgba($color: #000000, $alpha: 0.1);
+    color: #fc9155 !important;
+    font-weight: 600;
+  }
+
+  &--is-fail {
+    background-color: #fff !important;
+    opacity: 0.6;
+  }
+
+  &--is-choiced {
+    color: #fff !important;
+    background-color: rgba($color: #e79686, $alpha: 0.6) !important;
+  }
+
+  &--is-correct {
+    color: #fff !important;
+    background-color: #86e79e !important;
+  }
+}
+
+.echo-btn {
+  &--mat-icon-btn {
+    position: absolute;
+    top: 50%;
+    right: 5%;
+    transform: translateY(-50%);
+    width: 30px;
+    height: 30px;
+    background-color: rgba($color: #fc9155, $alpha: 0.6);
+    color: #fff;
+  }
+
+  &--mat-icon {
+    position: absolute;
+    top: 50%;
+    right: 5%;
+    transform: translateY(-50%);
+  }
+}
+
+/*
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+  回答後表示エリア
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+*/
+/* --- カルーセル --- */
+.caroucel {
+  &__page-list-container {
+    width: 100%;
+    // min-height: 232px;
+    height: 100%;
+  }
+
+  &__indicator {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 8px;
+  }
+
+  &__indicator-item {
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background-color: #d9d9d9;
+
+    &:not(:last-of-type) {
+      margin-right: 4px;
+    }
+
+    &--active {
+      background-color: #ffb800;
+    }
+
+    &--disabled {
+      background-color: transparent;
+    }
+  }
+}
+
+/* --- カルーセル（ページ） --- */
+.page-list {
+  display: flex;
+  overflow: auto;
+  scroll-snap-type: x mandatory;
+  -ms-overflow-style: none; /*スクロールバー非表示（IE・Edge）*/
+  scrollbar-width: none; /*スクロールバー非表示（Firefox）*/
+
+  &::-webkit-scrollbar {
+    /*スクロールバー非表示（Chrome・Safari）*/
+    display: none;
+  }
+
+  &__item {
+    min-width: 100%;
+    max-width: 100%;
+    min-height: 100%;
+    max-height: 100%;
+    scroll-snap-align: start;
+  }
+}
+
+.page2__characteristic {
+  display: flex;
+  flex: 1;
+  margin: auto;
+  width: 90%;
+  line-height: 2rem;
+  font-weight: 600;
+  color: #716e77;
+}
+
+/*
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+  画面遷移ボタン領域
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+*/
+.move-nav-area {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+/* --- 画面遷移ボタン --- */
+.move-btn {
+  &--mat-flat-btn {
+    width: 100%;
+    border-radius: 9999px;
+    color: #666 !important;
+    background-color: rgba($color: #fff, $alpha: 0.3) !important;
+  }
+
+  &--next {
+    color: #fff !important;
+    background-color: rgba($color: #fc9155, $alpha: 0.75) !important;
+  }
+
+  &--cancel {
+    color: #555 !important;
+    background-color: #fff !important;
+  }
+
+  &--disabled {
+    opacity: 0.7;
+    background-color: #aaa !important;
+  }
+}

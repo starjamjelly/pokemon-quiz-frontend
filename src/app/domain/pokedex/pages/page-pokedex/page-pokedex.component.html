@@ -1,0 +1,117 @@
+<!--
+  ポケモン図鑑一覧画面
+-->
+<!-- ▼.container -->
+<div class="container">
+  <!-- ▼検索領域 /.search -->
+  <section class="search toolbar-clearfix">
+    <div class="search__inner">
+      <app-title-within-divider [icon]="'search'" [title]="'けんさく'"></app-title-within-divider>
+      <!-- ▼検索項目選択チップ /.search__type-chip-list -->
+      <div class="search__type-chip-list">
+        <mat-chip-list>
+          <mat-chip
+            *ngFor="let type_chip of type_chip_list"
+            [selected]="type_chip.selected"
+            (click)="handleSelectTypeChip(type_chip.no)"
+            [class.type_chip--selected]="type_chip.selected"
+            class="mat-chip--type-chip"
+          >
+            {{ type_chip.type_name }}
+          </mat-chip>
+        </mat-chip-list>
+      </div>
+      <!-- ▲検索項目選択チップ /.search__type-chip-list -->
+
+      <!-- ▼検索フォーム /.search__form-control-area -->
+      <div class="search__form-control-area">
+        <!-- ▼世代検索プルダウン /.search__generation -->
+        <div *ngIf="current_type_chip_no === 1" class="search__generation">
+          <mat-form-field appearance="outline">
+            <mat-label>せだい</mat-label>
+            <mat-select
+              [(ngModel)]="selected_generation"
+              (ngModelChange)="handleSelectGeneration($event)"
+            >
+              <mat-option *ngFor="let generation of generations" [value]="generation">
+                <span *ngIf="generation === 0">すべてのせだい</span>
+                <span *ngIf="generation !== 0">だい{{ generation }}せだい</span>
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <!-- ▲世代検索プルダウン /.search__generation -->
+
+        <!-- ▼ポケモン名入力ボックス /.search__pokemon-name -->
+        <div *ngIf="current_type_chip_no === 2" class="search__pokemon-name">
+          <mat-form-field appearance="outline" class="search__pokemon-name-input">
+            <mat-label>なまえ</mat-label>
+            <input matInput [(ngModel)]="search_pokemon_name" maxlength="6" />
+          </mat-form-field>
+          <button
+            mat-mini-fab
+            (click)="handleSearchPokemonName(search_pokemon_name)"
+            class="pokemon-name-input__search-btn"
+          >
+            <mat-icon>saved_search</mat-icon>
+          </button>
+          <button
+            mat-mini-fab
+            (click)="handleCleanPokemonName()"
+            class="pokemon-name-input__reset-btn"
+          >
+            <mat-icon>clear</mat-icon>
+          </button>
+        </div>
+        <!-- ▲ポケモン名入力ボックス /.search__pokemon-name -->
+
+        <!-- お気に入り表示 /.search__generation -->
+        <div *ngIf="current_type_chip_no === 3" class="search__generation"></div>
+        <!-- ▲世代検索プルダウン /.search__generation -->
+      </div>
+      <!-- ▲検索フォーム /.search__form-control-area -->
+      <mat-divider></mat-divider>
+    </div>
+  </section>
+  <!-- ▲検索領域 /.search -->
+
+  <!-- ▼ポケモン一覧領域 /.pekedex -->
+  <section class="pokedex">
+    <ul class="pokemon-list" fxLayout="row wrap" fxLayoutAlign="center center">
+      <!-- ▼ポケモンカード -->
+      <li
+        *ngFor="let pokemon of pokemons | paginate : { itemsPerPage: max_view_cnt, currentPage: p }"
+      >
+        <mat-card (click)="handleMoveDetailPage(pokemon.pokedex_id)" class="card" matRipple>
+          <div class="card__image-container">
+            <img
+              src="{{ pokemon.image_path }}"
+              alt="{{ pokemon.pokemon_name }}"
+              class="card__image"
+            />
+            <div [style.border-color]="pokemon.color_1" class="card-image-bg__upper"></div>
+            <div [style.border-color]="pokemon.color_2" class="card-image-bg__lower"></div>
+          </div>
+          <hr class="card__divider" />
+          <h2 class="card__name">{{ pokemon.pokemon_name }}</h2>
+        </mat-card>
+      </li>
+      <!-- ▲ポケモンカード -->
+    </ul>
+
+    <!-- ▼ページネーション /.pagination-->
+    <pagination-controls
+      class="pagination"
+      (pageChange)="p = $event; window.scrollTo(0, 0)"
+      previousLabel="もどる"
+      nextLabel="すすむ"
+    ></pagination-controls>
+    <!-- ▲ページネーション /.pagination-->
+  </section>
+  <!-- ▲ポケモン一覧領域 /.pekedex -->
+</div>
+<!-- ▲.container -->
+
+<!-- ▼戻るボタン（フロート） -->
+<app-back-btn [back_url]="''"></app-back-btn>
+<!-- ▲戻るボタン（フロート） -->

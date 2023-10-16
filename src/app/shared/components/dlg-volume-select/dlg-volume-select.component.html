@@ -1,0 +1,21 @@
+<!--
+  問題数選択ダイアログ
+-->
+<h2 mat-dialog-title>なんもんチャレンジしますか？</h2>
+<div mat-dialog-content>
+  <mat-radio-group
+    aria-labelledby="input_volume"
+    [(ngModel)]="choice_volume"
+    class="volume-radio-group"
+  >
+    <mat-radio-button *ngFor="let volume of volumes" [value]="volume" class="volume-radio-btn">
+      {{ volume }}もん
+    </mat-radio-button>
+  </mat-radio-group>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="handleCancel()">やーめた</button>
+  <button mat-button (click)="handleSelectVolume(choice_volume)" type="button" cdkFocusInitial>
+    いくぞ！
+  </button>
+</div>

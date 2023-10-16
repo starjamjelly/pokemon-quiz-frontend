@@ -1,0 +1,73 @@
+<!--
+  ポケモン図鑑詳細画面
+-->
+<!-- ▼.container -->
+<div class="container toolbar-clearfix">
+  <!-- ▼前後遷移ボタン領域 /.move-nav-area -->
+  <nav class="move-nav-area">
+    <button mat-flat-button class="mat-flat-btn--move-btn" (click)="handleMoveDetail(-1)">
+      ひとつまえ
+    </button>
+    <button mat-flat-button class="mat-flat-btn--move-btn" (click)="handleMoveDetail(1)">
+      ひとつあと
+    </button>
+  </nav>
+  <!-- ▲前後遷移ボタン領域 /.move-nav-area -->
+
+  <!-- ▼ポケモン詳細領域 /.pokemon-detail-area -->
+  <section class="pokemon-detail-area">
+    <article class="detail-card">
+      <mat-card>
+        <!-- ▼詳細（ヘッダー部） /.detail-card__header-area -->
+        <div class="detail-card__header-area">
+          <div>
+            <small class="header-area__pokedex-id">No.{{ pokemon.pokedex_id }}</small>
+            <h2 class="header-area__pokemon-name">{{ pokemon.pokemon_name }}</h2>
+          </div>
+          <app-favorite-btn [is_favorite]="pokemon.is_favorite"></app-favorite-btn>
+        </div>
+        <!-- ▲詳細（ヘッダー部） /.detail-card__header-area -->
+
+        <!-- ▼詳細（メイン部） /.detail-card__characteristic-area -->
+        <div class="detail-card__characteristic-area">
+          <div class="detail-card__img-container">
+            <img
+              src="{{ pokemon.image_path }}"
+              alt="{{ pokemon.pokemon_name }}"
+              class="detail-card__img"
+              (load)="handleCompleteDraw()"
+            />
+          </div>
+          <p class="type-detail detail-row">
+            <span class="type-detail__lbl detail-card__detail-lbl">タイプ</span>
+            <span
+              *ngFor="let type of pokemon.types; let i = index"
+              [style.background-color]="i == 0 ? type_color_1 : type_color_2"
+              class="type-detail__type-icon type-icon"
+            >
+              {{ type.type_name }}
+            </span>
+          </p>
+          <p class="genus-detail detail-row">
+            <span class="genus-detail__lbl detail-card__detail-lbl">ぶんるい</span>
+            <span class="genus-detail__content detail-card__detail-content">
+              {{ pokemon.genus }}
+            </span>
+          </p>
+          <p class="characteristic-detail detail-row">
+            <span class="characteristic-detail__content detail-card__detail-content">
+              {{ pokemon.characteristic }}
+            </span>
+          </p>
+        </div>
+        <!-- ▲詳細（メイン部） /.detail-card__characteristic-area -->
+      </mat-card>
+    </article>
+  </section>
+  <!-- ▲ポケモン詳細領域 /.pokemon-detail-area -->
+</div>
+<!-- ▲.container -->
+
+<!-- ▼戻るボタン（フロート） -->
+<app-back-btn [back_url]="'/pokedex'"></app-back-btn>
+<!-- ▲戻るボタン（フロート） -->

@@ -1,0 +1,19 @@
+<!--
+  モバイル風通知ダイアログ
+-->
+<!-- ▼ダイアログ -->
+<div
+  [class.dlg-container--pos-top]="dlg_slide_in_service.getPosition() === 'top'"
+  class="dlg-container"
+>
+  <mat-card [@slideIn]="dlg_slide_in_service.getShowStatus()" class="dlg">
+    <mat-icon
+      aria-hidden="false"
+      aria-label="Dialog icon"
+      fontIcon="{{ dlg_slide_in_service.getIcon() }}"
+      class="dlg__icon dlg__icon--{{ dlg_slide_in_service.getIcon() }}"
+    ></mat-icon>
+    <p class="dlg__text">{{ dlg_slide_in_service.getText() }}</p>
+  </mat-card>
+</div>
+<!-- ▲ダイアログ -->

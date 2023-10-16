@@ -1,0 +1,152 @@
+<!--
+  シルエットクイズ画面
+-->
+<!-- ▼.container -->
+<div class="container toolbar-clearfix">
+  <!-- ▼問題の表示領域 /.question-card -->
+  <mat-card class="question-card">
+    <!-- ▼問題（プログレスバー・画像他） /.question-card__visual-area -->
+    <div class="question-card__visual-area">
+      <app-progress-bar
+        [full_raito]="volume"
+        [active_raito]="question_num - 1"
+        [theme_color]="'orange'"
+      ></app-progress-bar>
+      <small>
+        もんだい<span class="num-lbl__number">{{ question_num }}</span>
+      </small>
+      <div
+        class="question-card__img-container"
+        [class.question-card__img-container--biggest]="!is_choiced && quiz_kind === 'biggest'"
+      >
+        <img
+          [src]="current_question.image_path || ''"
+          alt="シルエットクイズの画像"
+          class="question-card__img"
+          [class.question-card__img--silhouette]="!is_choiced && quiz_kind === 'silhouette'"
+          [class.question-card__img--biggest]="!is_choiced && quiz_kind === 'biggest'"
+          (load)="handleCompleteDraw()"
+        />
+        <div
+          *ngIf="is_choiced"
+          [class.question-card--is-fail]="
+            !this.answered_list[this.answered_list.length - 1].is_correct
+          "
+          [class.question-card--is-correct]="
+            this.answered_list[this.answered_list.length - 1].is_correct
+          "
+        ></div>
+      </div>
+    </div>
+    <!-- ▲問題（プログレスバー・画像他） /.question-card__visual-area -->
+
+    <!-- ▼問題（選択肢エリア） /.question-card__answer-description-area -->
+    <div class="question-card__answer-description-area">
+      <!-- ▼カルーセル /.caroucel -->
+      <div class="caroucel">
+        <div class="caroucel__page-list-container">
+          <ul class="caroucel__page-list page-list" (scroll)="handleScrollCaroucel($event)">
+            <!-- ▼カルーセル（ページ1：選択肢） /.page-list__item -->
+            <li class="page-list__item">
+              <div
+                class="page-list__page1"
+                [@slideInCaroucel]="current_show_caroucel === 'page1' ? 'open' : 'close'"
+              >
+                <ul class="answer-choice-area__choice-btn-list">
+                  <li
+                    *ngFor="let choice_btn of choice_btn_list"
+                    class="answer-choice-area__btn-container"
+                  >
+                    <button
+                      (click)="handleClickChoiceBtn(choice_btn.pokedex_id, choice_btn.pokemon_name)"
+                      [class.choice-btn--is-choiced]="
+                        is_choiced &&
+                        choice_btn.pokedex_id ===
+                          this.answered_list[this.answered_list.length - 1].choice_pokedex_id
+                      "
+                      [class.choice-btn--is-fail]="
+                        is_choiced &&
+                        choice_btn.pokedex_id !==
+                          this.answered_list[this.answered_list.length - 1].correct_pokedex_id
+                      "
+                      [class.choice-btn--is-correct]="
+                        is_choiced &&
+                        choice_btn.pokedex_id ===
+                          this.answered_list[this.answered_list.length - 1].correct_pokedex_id
+                      "
+                      mat-flat-button
+                      type="button"
+                      class="answer-choice-area__choice-btn choice-btn--mat-flat-btn"
+                      disabled="{{ is_choiced }}"
+                    >
+                      {{ choice_btn.pokemon_name }}
+                    </button>
+                    <button
+                      (click)="handleEchoName(choice_btn.pokemon_name)"
+                      mat-icon-button
+                      matRipple
+                      [matRippleColor]="'#fc9155'"
+                      type="button"
+                      class="answer-choice-area__echo-btn echo-btn--mat-icon-btn"
+                    >
+                      <mat-icon class="echo-btn--mat-icon">volume_up</mat-icon>
+                    </button>
+                  </li>
+                </ul>
+              </div>
+            </li>
+            <!-- ▲カルーセル（ページ1：選択肢） /.page-list__item -->
+
+            <!-- ▼カルーセル（ページ2：図鑑説明） /.page-list__item -->
+            <li *ngIf="is_choiced" class="page-list__item">
+              <div
+                class="page-list__page2"
+                [@slideInCaroucel]="current_show_caroucel === 'page2' ? 'open' : 'close'"
+              >
+                <p class="page2__characteristic">{{ current_question.characteristic }}</p>
+              </div>
+            </li>
+            <!-- ▲カルーセル（ページ2：図鑑説明） /.page-list__item -->
+          </ul>
+        </div>
+        <!-- ▼カルーセルのページナビゲーション /.caroucel__indicator -->
+        <nav>
+          <ul class="caroucel__indicator">
+            <li
+              *ngFor="let page of caroucel_page_list"
+              class="caroucel__indicator-item"
+              [class.caroucel__indicator-item--active]="page === current_show_caroucel"
+              [class.caroucel__indicator-item--disabled]="!is_choiced"
+            ></li>
+          </ul>
+        </nav>
+        <!-- ▲カルーセルのページナビゲーション /.caroucel__indicator -->
+      </div>
+      <!-- ▲カルーセル /.caroucel -->
+
+      <!-- ▼画面遷移ボタン領域 /.move-nav-area -->
+      <nav class="move-nav-area" [class.move-nav-area--col2]="is_choiced">
+        <button
+          (click)="handleClickCancelGame()"
+          mat-flat-button
+          class="move-btn--mat-flat-btn move-btn--cancel"
+        >
+          やーめた
+        </button>
+        <button
+          (click)="handleClickNextBtn()"
+          mat-flat-button
+          class="move-btn--mat-flat-btn move-btn--next"
+          [class.move-btn--disabled]="!is_choiced"
+          disabled="{{ !is_choiced }}"
+        >
+          つぎへ
+        </button>
+      </nav>
+      <!-- ▲画面遷移ボタン領域 /.move-nav-area -->
+    </div>
+    <!-- ▲回答後表示エリア /.question-card__answer-description-area -->
+  </mat-card>
+  <!-- ▲問題の表示領域 /.question-card -->
+</div>
+<!-- ▲.container -->

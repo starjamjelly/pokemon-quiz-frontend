@@ -1,0 +1,117 @@
+<!--
+  サインアップ画面
+-->
+<!-- ▼.container -->
+<div class="container">
+  <div class="inner">
+    <!-- ▼ロゴの表示領域 /.logo-area -->
+    <div class="toolbar-clearfix logo-area">
+      <img
+        src="../../../../../assets/images/boquno_logo.svg"
+        alt="当サービスのロゴ"
+        class="mv-logo"
+      />
+    </div>
+    <!-- ▲ロゴの表示領域 /.logo-area -->
+
+    <!-- ▼サインアップフォームの表示領域 /.content-area > .login-form-container -->
+    <div class="content-area">
+      <strong class="input-caution-msg">
+        当サイトは個人情報を取り扱いません。<br />登録情報は簡易的なものにしてください。
+      </strong>
+      <form
+        [formGroup]="userRegistForm"
+        (ngSubmit)="handleSignup(userRegistForm)"
+        class="signup-form-container"
+      >
+        <!-- ▼ユーザーネーム入力 /.username-area -->
+        <div class="primary-text-form username-area">
+          <div class="primary-text-form__label-area">
+            <mat-label for="username" class="primary-text-form__label">ユーザーネーム</mat-label>
+            <mat-error
+              *ngIf="show_error_msg && error_msg.username !== ''"
+              [@errorShake]="show_error_msg && error_msg.username !== ''"
+              class="primary-text-form__err-msg"
+            >
+              {{ error_msg.username }}
+            </mat-error>
+          </div>
+          <input
+            type="text"
+            name="username"
+            placeholder="Taro1234"
+            id="username"
+            class="primary-text-form__input"
+            required
+            [formControl]="username_ctrl"
+            [maxlength]="form_maxlength"
+            ngModel
+            #username
+          />
+        </div>
+        <!-- ▲ユーザーネーム入力 /.username-area -->
+
+        <!-- ▼パスワード入力 /.password-area -->
+        <div class="primary-text-form password-area">
+          <div class="primary-text-form__label-area">
+            <mat-label for="password" class="primary-text-form__label">パスワード</mat-label>
+            <mat-error
+              *ngIf="show_error_msg && error_msg.password !== ''"
+              [@errorShake]="show_error_msg && error_msg.password !== ''"
+              class="primary-text-form__err-msg"
+            >
+              {{ error_msg.password }}
+            </mat-error>
+          </div>
+          <input
+            type="password"
+            name="password"
+            id="password"
+            class="primary-text-form__input"
+            required
+            [formControl]="password_ctrl"
+            [maxlength]="form_maxlength"
+            ngModel
+            #password
+          />
+        </div>
+        <!-- ▲パスワード入力 /.password-area -->
+
+        <!-- ▼確認パスワード入力 /.password-confirm-area -->
+        <div class="primary-text-form password-confirm-area">
+          <div class="primary-text-form__label-area">
+            <mat-label for="password_confirm" class="primary-text-form__label">
+              パスワード（確認）
+            </mat-label>
+            <mat-error
+              *ngIf="show_error_msg && error_msg.password_confirm !== ''"
+              [@errorShake]="show_error_msg && error_msg.password_confirm !== ''"
+              class="primary-text-form__err-msg"
+            >
+              {{ error_msg.password_confirm }}
+            </mat-error>
+          </div>
+          <input
+            type="password"
+            name="password_confirm"
+            id="password_confirm"
+            class="primary-text-form__input"
+            required
+            [formControl]="password_confirm_ctrl"
+            [maxlength]="form_maxlength"
+            ngModel
+            #password
+          />
+        </div>
+        <!-- ▲確認パスワード入力 /.password-confirm-area -->
+
+        <!-- ▼入力ボックス以下 -->
+        <button mat-flat-button class="mat-flat-btn--signup-btn" type="submit">登録</button>
+        <a (click)="handleMoveSignupPage()" class="login-link">アカウントをお持ちの方はこちら</a>
+        <!-- ▲入力ボックス以下 -->
+      </form>
+    </div>
+    <!-- ▲サインアップフォームの表示領域 /.content-area > .login-form-container -->
+  </div>
+</div>
+<!-- ▲.container -->

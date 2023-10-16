@@ -1,0 +1,106 @@
+/*
+###########################################################################
+  ログイン画面
+###########################################################################
+*/
+/* --- container --- */
+.container {
+  background-color: #ffe090;
+}
+
+/*
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+  ロゴ表示領域
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+*/
+.logo-area {
+  background-color: #fafafa;
+}
+
+.mv-logo {
+  display: block;
+  margin: auto;
+  padding-top: 40px;
+  padding-bottom: 40px;
+}
+
+/*
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+  ログインフォームの表示領域
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+*/
+.content-area {
+  background-color: #ffe090;
+  padding-top: 40px;
+  padding-bottom: 40px;
+}
+
+.login-form-container {
+  width: 100%;
+  max-width: 280px;
+  margin: auto;
+}
+
+/* --- テキストフォーム --- */
+.primary-text-form {
+  display: flex;
+  flex-direction: column;
+
+  &__label-area {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  &__label {
+    display: block;
+    margin-left: 1.25rem;
+    font-size: 4px;
+    transform: translateY(3px);
+  }
+
+  &__err-msg {
+    display: block;
+    margin-right: 1.25rem;
+    font-size: 4px;
+    transform: translateY(3px);
+  }
+
+  &__input {
+    display: block;
+    padding: 0.5rem 1.25rem;
+    border: none;
+    border-radius: 9999px;
+    background-color: #fefefe;
+
+    &:focus,
+    &:focus-visible {
+      outline: none;
+    }
+  }
+}
+
+.username-area {
+  margin-bottom: 12px;
+}
+
+.password-area {
+  margin-bottom: 32px;
+}
+
+/* --- ログインボタン --- */
+.login-btn--mat-flat-btn {
+  margin-bottom: 24px;
+  width: 100%;
+  border-radius: 9999px;
+  color: #666 !important;
+  background-color: rgba($color: #fff, $alpha: 0.3) !important;
+}
+
+/* --- サインアップ画面へのリンク --- */
+.forget-link {
+  display: inline-block;
+  text-align: center;
+  width: 100%;
+  font-size: 0.75rem;
+  color: #269ec5;
+}

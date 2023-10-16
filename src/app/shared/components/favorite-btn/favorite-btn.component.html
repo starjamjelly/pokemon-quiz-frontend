@@ -1,0 +1,11 @@
+<!--
+  お気に入りボタン
+-->
+<button
+  mat-mini-fab
+  class="mat-mini-fab--favorite-btn"
+  (click)="handleUpdateFavoriteState()"
+  [class.favorite-btn--active]="is_favorite"
+>
+  <mat-icon>favorite_border</mat-icon>
+</button>

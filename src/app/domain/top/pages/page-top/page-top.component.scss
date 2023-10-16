@@ -1,0 +1,102 @@
+/*
+###########################################################################
+  トップ画面
+###########################################################################
+*/
+/* --- container --- */
+.container {
+  background-color: #ffe090;
+}
+
+/*
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+  メインビジュアル
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+*/
+.mv {
+  margin-bottom: 40px;
+
+  &-logo {
+    display: block;
+    margin: auto;
+    padding-top: 40px;
+    padding-bottom: 40px;
+  }
+}
+
+.cta-txt {
+  text-align: center;
+  font-size: 1.25rem;
+  line-height: 1.5rem;
+  font-weight: 600;
+  color: #716e77;
+}
+
+/*
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+  メニュー
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+*/
+.menu {
+  padding-bottom: 40px;
+}
+
+.menu-list {
+  display: grid;
+  gap: 16px;
+
+  &__item {
+    width: fit-content;
+  }
+}
+
+/* --- メニューボタン --- */
+.menu-btn {
+  &--disabled {
+    opacity: 0.5;
+  }
+
+  &__img-circle {
+    width: 120px;
+    height: 120px;
+    border-width: 1px;
+    border-style: solid;
+    border-radius: 50%;
+
+    &--red {
+      border-color: #ff6847;
+      background-color: #ff6847;
+      box-shadow: 0px 4px 4px rgba($color: #ff6847, $alpha: 0.5);
+    }
+
+    &--blue {
+      border-color: #269ec5;
+      background-color: #269ec5;
+      box-shadow: 0px 4px 4px rgba($color: #269ec5, $alpha: 0.5);
+    }
+
+    &--yellow {
+      border-color: #ffcc47;
+      background-color: #ffcc47;
+      box-shadow: 0px 4px 4px rgba($color: #ffcc47, $alpha: 0.5);
+    }
+
+    &--green {
+      border-color: #8ae95d;
+      background-color: #8ae95d;
+      box-shadow: 0px 4px 4px rgba($color: #8ae95d, $alpha: 0.5);
+    }
+  }
+
+  &__lbl {
+    text-align: center;
+    margin: auto;
+    margin-top: 0.5rem;
+    width: 100px;
+    border-radius: 9999px;
+    font-size: 6px;
+    font-weight: 600;
+    color: #222;
+    background-color: rgba($color: #fff, $alpha: 0.3);
+  }
+}

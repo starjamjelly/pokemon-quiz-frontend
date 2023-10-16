@@ -1,0 +1,39 @@
+<!--
+  トップ画面
+-->
+<!-- ▼.container -->
+<div class="container">
+  <!-- ▼メインビジュアル /.mv -->
+  <div class="mv">
+    <img
+      src="../../../../../assets/images/boquno_logo_flat.svg"
+      alt="サービスのアイコン"
+      class="mv-logo"
+    />
+    <p class="cta-txt">きょうはなにから<br />はじめようか？</p>
+  </div>
+  <!-- ▲メインビジュアル /.mv -->
+
+  <!-- ▼メニュー /.menu -->
+  <nav class="menu">
+    <ul class="menu-list" fxLayout="row wrap" fxLayoutAlign="center center">
+      <li *ngFor="let menu_btn of menu_btns_state" class="menu-btn menu-list__item">
+        <a (click)="handleMenuSelect(menu_btn)" [class.menu-btn--disabled]="menu_btn.disabled">
+          <div
+            [class]="menu_btn.style_ex_classes"
+            matRipple
+            [matRippleUnbounded]="!menu_btn.disabled"
+            class="menu-btn__img-circle"
+          >
+            <img src="{{ menu_btn.img_path }}" alt="" class="menu-btn__img" />
+          </div>
+          <div class="menu-btn__lbl">
+            {{ menu_btn.txt }}
+          </div>
+        </a>
+      </li>
+    </ul>
+  </nav>
+  <!-- ▲メニュー /.menu -->
+</div>
+<!-- ▲.container -->

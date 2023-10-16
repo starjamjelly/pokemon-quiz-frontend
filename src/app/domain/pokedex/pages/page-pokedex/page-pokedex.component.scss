@@ -1,0 +1,216 @@
+/*
+###########################################################################
+  ポケモン図鑑一覧画面
+###########################################################################
+*/
+/* --- container --- */
+.container {
+  position: relative;
+  background-color: #eee;
+}
+
+/*
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+  検索領域
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+*/
+/* --- 検索メニュー --- */
+.search {
+  width: 100%;
+  position: sticky;
+  z-index: 10;
+  top: 0;
+  left: 0;
+  right: 0;
+  background-color: #ffe090;
+  box-shadow: 0 32px 30px -30px rgba(53, 47, 47, 0.15);
+
+  &__inner {
+    padding-right: 5%;
+    padding-left: 5%;
+    padding-bottom: 5%;
+  }
+
+  &__type-chip-list {
+    margin-top: 8px;
+    margin-bottom: 16px;
+  }
+
+  &__form-control-area {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  &__pokemon-name-input {
+    max-width: 7rem;
+  }
+}
+
+.mat-chip--type-chip {
+  border: 1px solid currentColor;
+  color: rgba(0, 0, 0, 0.12);
+  background-color: transparent;
+  box-shadow: none;
+
+  &::after {
+    content: none;
+  }
+}
+
+.type_chip--selected {
+  background-color: #888 !important;
+  border: none !important;
+}
+
+.pokemon-name-input {
+  &__reset-btn,
+  &__search-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: 8px;
+    box-shadow: none;
+  }
+
+  &__reset-btn {
+    border: 1px solid currentColor;
+    color: #888;
+    background-color: transparent;
+  }
+
+  &__search-btn {
+    color: #fff;
+    background-color: rgba($color: #fc9155, $alpha: 0.75);
+  }
+}
+
+/*
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+  ポケモン一覧領域
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+*/
+.pokemon-list {
+  padding-top: 1rem;
+  display: grid;
+  grid-template-columns: 120px 120px;
+  gap: 1rem;
+}
+
+/* --- ポケモンカード --- */
+.card {
+  &__name {
+    margin: 0;
+    font-size: 0.8rem;
+    font-weight: bold;
+    text-align: center;
+    color: #777;
+    transform: translateY(0.5rem);
+
+    &::after,
+    &::before {
+      content: 'X';
+      opacity: 0;
+    }
+  }
+
+  &__divider {
+    height: 1px;
+    margin: 0;
+    border: none;
+    background-color: #ddd;
+  }
+
+  &__image {
+    display: block;
+    position: relative;
+    z-index: 1;
+    width: 100px;
+    height: 100px;
+    border: none;
+
+    &-container {
+      margin-bottom: 12px;
+    }
+  }
+}
+
+.card-image-bg {
+  &__upper,
+  &__lower {
+    position: absolute;
+    z-index: 0;
+    width: 98px;
+    height: 46px;
+    border: 1px solid #ddd;
+    background-color: transparent;
+  }
+
+  &__upper {
+    border-radius: (9999px 9999px 0 0);
+    transform: translateY(-100px);
+  }
+
+  &__lower {
+    border-radius: (0 0 9999px 9999px);
+    transform: translateY(-48px);
+  }
+}
+
+/*
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+  ページネーション（外部UIライブラリ）
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+*/
+.pagination ::ng-deep .ngx-pagination {
+  max-width: 25rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 0 auto;
+  padding: 2rem 0;
+
+  * {
+    padding: 0;
+    width: fit-content;
+
+    &:hover {
+      background: none;
+    }
+  }
+
+  li {
+    width: 1.75rem;
+    height: 1.75rem;
+    position: relative;
+    font-size: 0.75rem;
+    font-weight: bold;
+    border: 2px solid #888;
+    border-radius: 50%;
+
+    &.current {
+      color: #fff;
+      background-color: #888;
+    }
+
+    &:not(.current) {
+      * {
+        color: #888;
+      }
+      background-color: #eee;
+    }
+
+    > a,
+    span {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translateY(-50%) translateX(-50%);
+    }
+  }
+
+  .pagination-previous,
+  .pagination-next {
+    display: none;
+  }
+}

@@ -1,0 +1,10 @@
+.app__phone-frame {
+  margin: auto;
+}
+
+@media screen and (min-width: 600px) {
+  .app__phone-frame {
+    max-width: 320px;
+    box-shadow: 0px 2px 16px 0px rgba(0, 0, 0, 0.2);
+  }
+}

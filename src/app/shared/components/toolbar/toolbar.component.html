@@ -1,0 +1,30 @@
+<!--
+  ツールバー
+-->
+<nav class="toolbar">
+  <div class="toolbar__inner">
+    <div class="toolbar__title">
+      <img
+        src="../../../../../assets/images/boquno_logo_black.svg"
+        alt="サービスのロゴ"
+        class="toolbar__logo"
+      />
+    </div>
+    <div class="toolbar__nav">
+      <button
+        mat-icon-button
+        [matMenuTriggerFor]="global_menu"
+        aria-label="グローバルメニュー"
+        class="nav__menu"
+      >
+        <mat-icon>menu</mat-icon>
+      </button>
+      <mat-menu #global_menu="matMenu">
+        <button mat-menu-item (click)="handleLogout()">
+          <mat-icon>logout</mat-icon>
+          <span>ログアウト</span>
+        </button>
+      </mat-menu>
+    </div>
+  </div>
+</nav>

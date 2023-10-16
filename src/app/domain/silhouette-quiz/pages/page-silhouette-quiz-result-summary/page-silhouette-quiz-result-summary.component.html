@@ -1,0 +1,75 @@
+<!--
+  シルエットクイズ結果画面
+-->
+<!-- ▼container -->
+<div class="container toolbar-clearfix">
+  <!-- ▼結果グラフ表示領域 /.chart-area -->
+  <div class="chart-area">
+    <div class="chart-area__point-area">
+      <div class="chart-area__fail-point">
+        {{ fail_point }}
+      </div>
+    </div>
+    <div class="chart-area__chart">
+      <canvas
+        baseChart
+        [type]="chartType"
+        [datasets]="chartDatasets"
+        [labels]="chartLabels"
+        [options]="chartOptions"
+        [legend]="chartLegend"
+        class="chart"
+      ></canvas>
+    </div>
+    <div class="chart-area__point-area">
+      <div class="chart-area__correct-point">
+        {{ correct_point }}
+      </div>
+    </div>
+  </div>
+  <!-- ▲結果グラフ表示領域 /.chart-area -->
+
+  <!-- ▼結果リスト表示領域 /.result-list-area -->
+  <div class="result-list-area">
+    <ul class="result-list">
+      <!-- ▼結果(行)/.result-list__result-row result-row -->
+      <li *ngFor="let answer of answered_list" matRipple class="result-list__result-row result-row">
+        <div class="result-row__cell">
+          <img
+            [src]="answer.image_path"
+            alt="{{ answer.correct_pokemon_name }}の画像"
+            class="result-row__cell-inner result-row__img"
+          />
+        </div>
+        <div class="result-row__cell">
+          <div
+            class="result-row__cell-inner result-row__mark"
+            [class.result-row__mark--is-correct]="answer.is_correct"
+            [class.result-row__mark--is-fail]="!answer.is_correct"
+          ></div>
+        </div>
+        <div class="result-row__cell">
+          <div class="result-row__cell-inner result-row__correct-pokemon-name">
+            {{ answer.correct_pokemon_name }}
+          </div>
+        </div>
+        <div class="result-row__cell">
+          <div class="result-row__cell-inner result-row__choice-pokemon-name">
+            {{ answer.choice_pokemon_name }}
+          </div>
+        </div>
+      </li>
+      <!-- ▲結果(行)/.result-list__result-row result-row -->
+    </ul>
+  </div>
+  <!-- ▲結果リスト表示領域 /.result-list-area -->
+  <button
+    mat-flat-button
+    class="move-top-btn--mat-flat-button"
+    type="button"
+    (click)="handleClickBackBtn()"
+  >
+    さいしょへもどる
+  </button>
+</div>
+<!-- ▲container -->

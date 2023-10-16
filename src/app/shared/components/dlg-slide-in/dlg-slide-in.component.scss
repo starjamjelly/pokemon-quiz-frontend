@@ -1,0 +1,43 @@
+/*
+###########################################################################
+  モバイル風通知ダイアログ
+###########################################################################
+*/
+.dlg-container {
+  pointer-events: none;
+  position: fixed;
+  z-index: 1;
+  bottom: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  min-width: 90%;
+  max-width: 90%;
+
+  &--pos-top {
+    top: calc(10vh + 10px);
+    bottom: auto;
+  }
+}
+
+.dlg {
+  display: flex;
+  align-items: center;
+
+  &__icon {
+    display: block;
+    margin-right: 4px;
+
+    &--error_outline {
+      color: #e79686;
+    }
+
+    &--check_circle_outline {
+      color: #86e79e;
+    }
+  }
+
+  &__text {
+    display: block;
+    color: #222;
+  }
+}

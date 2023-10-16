@@ -1,0 +1,10 @@
+<!--
+  タイトル付き区切り線
+-->
+<div class="divider">
+  <mat-icon *ngIf="icon" class="divider__child">{{ icon }}</mat-icon>
+  <p *ngIf="title" class="divider__child divider__title">
+    <b>{{ title }}</b>
+  </p>
+  <div class="divider__child divider__line"></div>
+</div>
